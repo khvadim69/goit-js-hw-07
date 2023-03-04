@@ -21,7 +21,6 @@ function createGalleryCardsMarkup(items) {
     .join("");
 }
 
-
 const cardsMarkup = createGalleryCardsMarkup(galleryItems);
 galleryContainer.insertAdjacentHTML("beforeend", cardsMarkup);
 galleryContainer.addEventListener("click", handleGaleryContainerClick);
@@ -43,4 +42,3 @@ height="600" />
 
   instance.show();
 }
-

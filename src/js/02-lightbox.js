@@ -1,7 +1,6 @@
 import { galleryItems } from "./gallery-items.js";
 
 const galleryContainer = document.querySelector(".gallery");
-galleryContainer.setAttribute("uk-lightbox", "caption-position:bottom");
 console.log(galleryContainer);
 galleryContainer.addEventListener("click", handleGaleryContainerClick);
 
@@ -10,15 +9,14 @@ function createGalleryCardsMarkup(item) {
     .map(({ preview, original, description }) => {
       return `
     
-        <a class="gallery__item" href="${original}" data-caption = "${description}";
+        <a class="gallery__item" href="${original}";
         >
         <img
             class="gallery__image"
             src="${preview}"
             alt="${description}"
             title = ${description};
-            delay = 250; 
-            titlePosition = "top"/>
+          />
         </a>
     
     `;
@@ -37,10 +35,14 @@ function handleGaleryContainerClick(event) {
   let href = event.target.closest("a").getAttribute("href");
   return href;
 }
-let gallery =
-  new SimpleLightbox(".gallery a");
+let gallery = new SimpleLightbox(".gallery a", {
+  captionSelector: "img",
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+  scrollZoom: false,
+});
 gallery.on("show.simplelightbox", function () {});
 gallery.on("error.simplelightbox", function (event) {
   console.log(event);
 });
-
