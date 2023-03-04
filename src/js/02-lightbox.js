@@ -9,8 +9,8 @@ function createGalleryCardsMarkup(item) {
   return item
     .map(({ preview, original, description }) => {
       return `
-    <div class="gallery__item">
-        <a class="gallery__link" href="${original}" data-caption = "${description}";
+    
+        <a class="gallery__item" href="${original}" data-caption = "${description}";
         >
         <img
             class="gallery__image"
@@ -20,14 +20,14 @@ function createGalleryCardsMarkup(item) {
             delay = 250; 
             titlePosition = "top"/>
         </a>
-    </div>
+    
     `;
     })
     .join("");
 }
-
-const galleryElements = createGalleryCardsMarkup(galleryItems);
-galleryContainer.append(...galleryElements);
+const cardsMarkup = createGalleryCardsMarkup(galleryItems);
+galleryContainer.insertAdjacentHTML("beforeend", cardsMarkup);
+galleryContainer.addEventListener("click", handleGaleryContainerClick);
 function handleGaleryContainerClick(event) {
   event.preventDefault();
   if (event.target.nodeName !== "IMG") {
@@ -37,10 +37,10 @@ function handleGaleryContainerClick(event) {
   let href = event.target.closest("a").getAttribute("href");
   return href;
 }
-let gallery = new SimpleLightbox(".gallery a");
+let gallery =
+  new SimpleLightbox(".gallery a");
 gallery.on("show.simplelightbox", function () {});
 gallery.on("error.simplelightbox", function (event) {
   console.log(event);
 });
 
-console.log(createGalleryElement(galleryItems));
